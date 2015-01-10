@@ -18,6 +18,7 @@ void setup()
 
 void draw()
 {
+  background(0);
   for(Player player:players)
   {
     player.update();
@@ -78,7 +79,7 @@ void setUpPlayerControllers()
             , playerXML);
     int x = (i + 1) * gap;
     p.pos.x = x;
-    p.pos.y = 300;
+    p.pos.y = 450;
    players.add(p);         
   }
 }
