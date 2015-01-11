@@ -7,6 +7,7 @@
 */
 
 ArrayList<Player> players = new ArrayList<Player>();
+ArrayList<enemy> enemy = new ArrayList<enemy>();
 boolean[] keys = new boolean[526];
 
 void setup()
@@ -24,6 +25,7 @@ void draw()
     player.update();
     player.display();
   }
+  
 }
 
 void keyPressed()
