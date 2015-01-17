@@ -6,15 +6,17 @@
     See: https://github.com/skooter500/DT228-OOP 
 */
 
-ArrayList<Player> players = new ArrayList<Player>();
-ArrayList<enemy> enemy = new ArrayList<enemy>();
+ArrayList<Player> players = new ArrayList();
+ArrayList<Enemy> enemies = new ArrayList();
 boolean[] keys = new boolean[526];
+int numCol = 10;
 
 void setup()
 {
   size(500, 500);
   setUpPlayerControllers();
   background(0);
+  generateEnemies();
 }
 
 void draw()
@@ -25,8 +27,10 @@ void draw()
     player.update();
     player.display();
   }
+   handleEnemies();
   
 }
+
 
 void keyPressed()
 {
@@ -85,3 +89,20 @@ void setUpPlayerControllers()
    players.add(p);         
   }
 }
+
+void generateEnemies() {
+  for (int i = 0; i < 20; i++) {
+    float x = width*.1 + i%numCol*60;
+    float y = 60 + int(i/numCol)*70 ;
+    enemies.add(new Enemy(x, y));
+  }
+}
+void handleEnemies() {
+  for (int i = 0; i < enemies.size(); i++) {
+    Enemy enemy = (Enemy) enemies.get(i);
+    enemy.move();
+    enemy.display();
+  }
+}
+
+

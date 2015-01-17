@@ -1,42 +1,60 @@
-class enemy
+class Enemy
 {
-  enemy()
-  {
+  float x, y;
+  float velocity;
+  Enemy(float x, float y) {
+    this.x = x;
+    this.y = y;
+    this.velocity = 5;
   }
-  void display()
-  {
+
+
+  void display() {
     int size=5;
     fill( 255, 0, 0);
     for (int i=0; i<7; i++)
     {
-      rect(100+i*size, 100, size, size);
+      rect(x+i*size, y, size, size);
     }
     for (int i=0; i<9; i++)
     {
-      rect(95+i*size, 105, size, size);
+      rect((x-size)+i*size, y+size, size, size);
     }
     for (int i=0; i<11; i++)
     {
-      rect(90+i*5, 110, size, size);
-      rect(90+i*5, 115, size, size);
-      rect(90+i*5, 120, size, size);
+      rect((x-10)+i*size, y+10, size, size);
+      rect((x-10)+i*size, y+15, size, size);
+      rect((x-10)+i*size, y+20, size, size);
     }
     for (int i=0; i<2; i++)
     {
       fill(255, 0, 0);
-      rect(125+i*5, 95-i*5, 5, 5);
-      rect(105-i*5, 95-i*5, 5, 5);
+      rect((x+25)+i*size, (y-size)-i*size, size, size);
+      rect((x+size)-i*size, (y-size)-i*size, size, size);
 
-      rect(105+i*5, 125, 5, 5);
-      rect(120+i*5, 125, 5, 5);
+      rect((x+size)+i*size, y+25, size, size);
+      rect((x+20)+i*size, y+25, size, size);
       fill(0);
-      rect(105+i*20, 105, 5, 5);
-      rect(95+i*40, 115, 5, 5);
-      rect(95+i*40, 120, 5, 5);
-      rect(105+i*5, 120, 5, 5);
-      rect(120+i*5, 120, 5, 5);
-      rect(115, 120, 5, 5);
+      rect((x+5)+i*20, y+size, size, size);
+      rect((x-5)+i*40, y+15, size, size);
+      rect((x-5)+i*40, y+20, size, size);
+      rect((x+5)+i*5, y+20, size, size);
+      rect((x+20)+i*5, y+20, size, size);
+      rect(x+15, y+20, 5, size);
     }
   }
+   void move() {
+    this.x+=this.velocity;
+    if (this.x > width*.9) {
+      this.x = width*.9;
+      this.velocity *= -1;
+      this.y+=40;
+    }
+    if (this.x < width*.1) {
+      this.velocity*=-1;
+      this.x = width*.1;
+      this.y+=40;
+    }
+  }  
 }
 
