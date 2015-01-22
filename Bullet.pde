@@ -9,6 +9,7 @@ class Bullet {
   }
   
   void display(){
+    fill(255);
     rect(this.x, this.y, 5,20);
   }
   

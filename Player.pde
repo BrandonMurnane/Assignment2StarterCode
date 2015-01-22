@@ -10,10 +10,15 @@ class Player
   char button2;
   int index;
   color colour;
+  boolean canShoot;
+  int timeLastShot;
+  int coolDown;
 
   Player()
   {
     pos = new PVector(50, 50);
+    this.timeLastShot = 0;
+    this.coolDown = 400;
   }
 
   Player(int index, color colour, char up, char down, char left, char right, char start, char button1, char button2)
@@ -43,6 +48,13 @@ class Player
       , buttonNameToKey(xml, "button2")
       );
   }
+  void shoot() {
+    if (millis() - timeLastShot > coolDown) {
+      Bullet bullet = new Bullet(pos.x, pos.y, -5);
+      bullets.add(bullet);
+      timeLastShot = millis();
+    }
+  }
 
   void update()
   {
@@ -68,6 +80,10 @@ class Player
     }
     if (checkKey(button1))
     {
+      for (Player player : players)
+      {
+        player.shoot();
+      }
       println("Player " + index + " button 1");
     }
     if (checkKey(button2))
@@ -88,10 +104,10 @@ class Player
     float halfWidth = 20/ 2;
     float halfHeight = 20 / 2;
     fill(colour);
-    triangle(-halfWidth, halfHeight,0, - halfHeight, halfWidth, halfWidth);
+    triangle(-halfWidth, halfHeight, 0, - halfHeight, halfWidth, halfWidth);
     fill(0);
     stroke(0);
-    triangle(halfWidth, halfHeight, 0, 0,- halfWidth, halfHeight);
+    triangle(halfWidth, halfHeight, 0, 0, - halfWidth, halfHeight);
     popMatrix();
   }
 }

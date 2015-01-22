@@ -43,6 +43,7 @@ class Enemy
       rect(x+15, y+20, 5, size);
     }
   }
+  
    void move() {
     this.x+=this.velocity;
     if (this.x > width*.9) {
