@@ -45,6 +45,10 @@ class Enemy
       rect(x+15, y+20, 5, size);
     }
   }
+   void shoot(){
+    Bullet b = new Bullet(this.x, this.y, 5);
+    bullets.add(b);
+  }
   
    void move() {
     this.x+=this.velocity;

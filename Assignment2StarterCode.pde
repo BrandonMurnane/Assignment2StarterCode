@@ -103,6 +103,9 @@ void handleEnemies() {
     Enemy enemy = (Enemy) enemies.get(i);
     enemy.move();
     enemy.display();
+        if (random(1) > .995) {
+      enemy.shoot();
+    }
   }
 }
 
