@@ -2,16 +2,18 @@ class Enemy
 {
   float x, y;
   float velocity;
-  Enemy(float x, float y) {
+  color colour;
+  Enemy(float x, float y,color colour) {
     this.x = x;
     this.y = y;
     this.velocity = 5;
+    this.colour = colour;
   }
 
 
   void display() {
     int size=5;
-    fill( 255, 0, 0);
+    fill(this.colour);
     for (int i=0; i<7; i++)
     {
       rect(x+i*size, y, size, size);
@@ -28,7 +30,7 @@ class Enemy
     }
     for (int i=0; i<2; i++)
     {
-      fill(255, 0, 0);
+      fill(this.colour);
       rect((x+25)+i*size, (y-size)-i*size, size, size);
       rect((x+size)-i*size, (y-size)-i*size, size, size);
 

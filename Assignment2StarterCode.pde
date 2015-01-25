@@ -94,7 +94,8 @@ void generateEnemies() {
   for (int i = 0; i < 20; i++) {
     float x = width*.1 + i%numCol*60;
     float y = 60 + int(i/numCol)*70 ;
-    enemies.add(new Enemy(x, y));
+    color colour=color(random(0, 255), random(0, 255), random(0, 255));
+    enemies.add(new Enemy(x, y,colour));
   }
 }
 void handleEnemies() {
