@@ -3,7 +3,7 @@ class Enemy
   float x, y;
   float velocity;
   color colour;
-  Enemy(float x, float y,color colour) {
+  Enemy(float x, float y, color colour) {
     this.x = x;
     this.y = y;
     this.velocity = 5;
@@ -45,12 +45,12 @@ class Enemy
       rect(x+15, y+20, 5, size);
     }
   }
-   void shoot(){
+  void shoot() {
     Bullet b = new Bullet(this.x, this.y, 5);
     bullets.add(b);
   }
-  
-   void move() {
+
+  void move() {
     this.x+=this.velocity;
     if (this.x > width*.9) {
       this.x = width*.9;
@@ -63,5 +63,16 @@ class Enemy
       this.y+=40;
     }
   }  
+  void hitCheck()
+  {
+    for (int i = 0; i < bullets.size (); i++) {
+      Bullet b = (Bullet) bullets.get(i);      
+      float distBetween = dist(b.x, b.y, this.x, this.y);
+      if (distBetween < 40 && b.velocity < 0) {
+        enemies.remove(this);
+        bullets.remove(b);
+      }
+    }
+  }
 }
 

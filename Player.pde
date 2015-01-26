@@ -110,5 +110,15 @@ class Player
     triangle(halfWidth, halfHeight, 0, 0, - halfWidth, halfHeight);
     popMatrix();
   }
+  void hitCheck() 
+  {
+    for (int i = 0; i < bullets.size (); i++) {
+      Bullet b = (Bullet) bullets.get(i);
+      float distBetween = dist(b.x, b.y, pos.x, pos.y);
+      if (b.velocity > 0 && rectIntersect(pos.x-15, pos.y, 30, 30, b.x, b.y, 5, 20)) {
+        bullets = new ArrayList();
+      }
+    }
+  }
 }
 

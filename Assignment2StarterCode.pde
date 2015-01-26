@@ -27,6 +27,7 @@ void draw()
   {
     player.update();
     player.display();
+    player.hitCheck();
   }
   handleEnemies();
   handleBullets();
@@ -103,6 +104,7 @@ void handleEnemies() {
     Enemy enemy = (Enemy) enemies.get(i);
     enemy.move();
     enemy.display();
+     enemy.hitCheck();
         if (random(1) > .995) {
       enemy.shoot();
     }
