@@ -5,16 +5,15 @@
  Loads player properties from an xml file
  See: https://github.com/skooter500/DT228-OOP 
  */
-
 ArrayList<Player> players = new ArrayList();
 ArrayList<Enemy> enemies = new ArrayList();
 ArrayList<Bullet> bullets  = new ArrayList();
 boolean[] keys = new boolean[526];
-int numCol = 10;
-
+int numCol = 15;
+int lives=4;
 void setup()
 {
-  size(500, 500);
+  size(800, 600);
   setUpPlayerControllers();
   background(0);
   generateEnemies();
@@ -29,6 +28,10 @@ void draw()
     player.display();
     player.hitCheck();
   }
+  if (lives = 0){
+    Endgame();
+  }
+  showLives();
   handleEnemies();
   handleBullets();
 }
@@ -86,13 +89,24 @@ void setUpPlayerControllers()
       , playerXML);
     int x = (i + 1) * gap;
     p.pos.x = x;
-    p.pos.y = 450;
+    p.pos.y = 550;
     players.add(p);
   }
 }
 
+void showLives(){
+  for (int i = 0; i <= lives; i++){
+    fill(255);
+    rect(width-40*i, 10, 30, 30);
+  } 
+}
+
+void endgame()
+{
+}
+
 void generateEnemies() {
-  for (int i = 0; i < 20; i++) {
+  for (int i = 0; i < 30; i++) {
     float x = width*.1 + i%numCol*60;
     float y = 60 + int(i/numCol)*70 ;
     color colour=color(random(0, 255), random(0, 255), random(0, 255));

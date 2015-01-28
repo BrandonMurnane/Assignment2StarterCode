@@ -16,7 +16,7 @@ class Player
 
   Player()
   {
-    pos = new PVector(50, 50);
+    pos = new PVector(50, 10);
     this.timeLastShot = 0;
     this.coolDown = 400;
   }
@@ -33,6 +33,7 @@ class Player
     this.start = start;
     this.button1 = button1;
     this.button2 = button2;
+    //this.lives;
   }
 
   Player(int index, color colour, XML xml)
@@ -117,6 +118,7 @@ class Player
       float distBetween = dist(b.x, b.y, pos.x, pos.y);
       if (b.velocity > 0 && rectIntersect(pos.x-15, pos.y, 30, 30, b.x, b.y, 5, 20)) {
         bullets = new ArrayList();
+        lives--;
       }
     }
   }
