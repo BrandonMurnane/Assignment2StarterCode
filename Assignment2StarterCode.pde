@@ -15,11 +15,23 @@ int score=400;
 boolean play=false;
 char gameover;
 
+boolean devMode = false;
+boolean sketchFullScreen() {
+  return ! devMode;
+}
+
 
 
 void setup()
 {
-  size(800, 600);
+  if (devMode)
+  {
+    size(800, 600);
+  }
+  else
+  {
+    size(displayWidth, displayHeight);
+  }
   setUpPlayerControllers();
   background(0);
   generateEnemies();
