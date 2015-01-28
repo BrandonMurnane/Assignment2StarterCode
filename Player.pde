@@ -69,11 +69,19 @@ class Player
     }
     if (checkKey(left))
     {
-      pos.x -= 1;
+      if (pos.x==0 || pos.x<0)
+      {
+        pos.x+=2;
+      }
+      pos.x -= 3;
     }    
     if (checkKey(right))
     {
-      pos.x += 1;
+      if (pos.x+30==width || pos.x+30>width)
+      {
+        pos.x-=2;
+      }
+      pos.x += 3;
     }
     if (checkKey(start))
     {
@@ -84,6 +92,10 @@ class Player
       for (Player player : players)
       {
         player.shoot();
+      }
+      if (play==false)
+      {
+        play=true;
       }
       println("Player " + index + " button 1");
     }

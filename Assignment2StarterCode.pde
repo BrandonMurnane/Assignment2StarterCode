@@ -11,30 +11,90 @@ ArrayList<Bullet> bullets  = new ArrayList();
 boolean[] keys = new boolean[526];
 int numCol = 15;
 int lives=4;
+int score=400;
+boolean play=false;
+char gameover;
+
+
+
 void setup()
 {
   size(800, 600);
   setUpPlayerControllers();
   background(0);
   generateEnemies();
+  gameover='F';
+  importHighscore();
+  lives=4;
 }
 
 void draw()
 {
-  background(0);
-  for (Player player : players)
+  if (lives==0)
   {
-    player.update();
-    player.display();
-    player.hitCheck();
+    println("lives--");
+    gameover='T';
+    println("check1");
   }
-  if (lives = 0){
-    Endgame();
+  if (play==false)
+  {
+    //background(back);
+    textAlign(CENTER, TOP);
+    textSize(40);
+    text("Press E to play", width/2, height/2-60);
+    textSize(50);
+    text("Controls", width/2, height/2);
+    textSize(50);
+    text("Right=D/L", width/2-60, height/2+60);
+    text("Left=A/J", width/2, height/2+120);
+    text("Shoot=E/U", width/2, height/2+180);
+    for (Player player : players)
+    {
+      player.update();
+      //player.display();
+      player.hitCheck();
+    }
+  } else
+  {
+    if (gameover=='T');
+    {
+      background(0);
+      println("check");
+      textAlign(CENTER, TOP);
+      textSize(50);
+      fill(255, 0, 0);
+      text("Your Score was", width/2, height/2);
+      text("The Highscore is", width/2, height/2+120);
+      fill(255, 102, 0);
+      text("Game Over", width/2, height/2-60);
+      text(score, width/2, height/2+60);//prints your score
+
+      updateHighscore();//updates highscore
+      text(highscore, width/2, height/2+180);//prints highscore
+    }
+    if (gameover=='F')
+    {
+      background(0);
+      for (Player player : players)
+      {
+        player.update();
+        player.display();
+        player.hitCheck();
+      }
+      importHighscore();
+      showLives();
+      handleEnemies();
+      handleBullets();
+      if (frameCount%60==0)
+      {
+        score-=10;
+      }
+      println(gameover);
+    }
   }
-  showLives();
-  handleEnemies();
-  handleBullets();
 }
+
+
 
 
 void keyPressed()
@@ -94,11 +154,12 @@ void setUpPlayerControllers()
   }
 }
 
-void showLives(){
-  for (int i = 0; i <= lives; i++){
+void showLives() {
+  for (int i = 0; i <= lives; i++) {
     fill(255);
     rect(width-40*i, 10, 30, 30);
-  } 
+  }
+  println(lives);
 }
 
 void endgame()
@@ -110,7 +171,7 @@ void generateEnemies() {
     float x = width*.1 + i%numCol*60;
     float y = 60 + int(i/numCol)*70 ;
     color colour=color(random(0, 255), random(0, 255), random(0, 255));
-    enemies.add(new Enemy(x, y,colour));
+    enemies.add(new Enemy(x, y, colour));
   }
 }
 void handleEnemies() {
@@ -118,8 +179,8 @@ void handleEnemies() {
     Enemy enemy = (Enemy) enemies.get(i);
     enemy.move();
     enemy.display();
-     enemy.hitCheck();
-        if (random(1) > .995) {
+    enemy.hitCheck();
+    if (random(1) > .995) {
       enemy.shoot();
     }
   }
